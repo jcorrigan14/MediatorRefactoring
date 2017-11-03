@@ -103,6 +103,7 @@ public class Elevator extends ElevatorSystemComponent {
      * elevator does not move.  If the elevator does move, observers are
      * notified.
      */
+
     public void move() {
         switch(direction) {
             case UP:

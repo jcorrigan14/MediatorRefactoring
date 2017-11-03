@@ -9,11 +9,11 @@ public class ElevatorControl implements Mediator {
         elevatorSystemComponents = new ArrayList<>();
     }
 
-    public void addElevator(ElevatorSystemComponent elevator){
+    public void addElevator(Elevator elevator){
         elevatorSystemComponents.add(elevator);
     }
 
-    public void addButton(ElevatorSystemComponent button){
+    public void addButton(Button button){
         elevatorSystemComponents.add(button);
     }
 
