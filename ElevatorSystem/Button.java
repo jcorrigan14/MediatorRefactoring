@@ -5,7 +5,7 @@ package ElevatorSystem;
  *
  * Created by robertstjacquesjr on 7/12/17.
  */
-public class Button extends ElevatorComponent {
+public class Button extends ElevatorSystemComponent {
 
     /**
      * The floor on which this button is installed.
@@ -31,7 +31,7 @@ public class Button extends ElevatorComponent {
      * @param direction The direction that the button calls an elevator to
      *                  move in.
      */
-    public Button(ConcreteMediator mediator, int floor, Direction direction) {
+    public Button(ElevatorControl mediator, int floor, Direction direction) {
         super(mediator);
         this.floor = floor;
         this.direction = direction;

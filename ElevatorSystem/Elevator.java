@@ -6,7 +6,7 @@ package ElevatorSystem;
  *
  * Created by robertstjacquesjr on 7/12/17.
  */
-public class Elevator extends ElevatorComponent {
+public class Elevator extends ElevatorSystemComponent {
     /**
      * The elevator number.
      */
@@ -34,7 +34,7 @@ public class Elevator extends ElevatorComponent {
      *               identifier for an elevator.
      */
 
-    public Elevator(ConcreteMediator mediator, int number) {
+    public Elevator(ElevatorControl mediator, int number) {
         super(mediator);
         this.number = number;
         currentFloor = 1;

@@ -2,26 +2,26 @@ package ElevatorSystem;
 
 import java.util.ArrayList;
 
-public class ConcreteMediator implements Mediator {
-    private ArrayList<ElevatorComponent> elevatorComponents;
+public class ElevatorControl implements Mediator {
+    private ArrayList<ElevatorSystemComponent> elevatorSystemComponents;
 
-    public ConcreteMediator() {
-        elevatorComponents = new ArrayList<>();
+    public ElevatorControl() {
+        elevatorSystemComponents = new ArrayList<>();
     }
 
-    public void addElevator(ElevatorComponent elevator){
-        elevatorComponents.add(elevator);
+    public void addElevator(ElevatorSystemComponent elevator){
+        elevatorSystemComponents.add(elevator);
     }
 
-    public void addButton(ElevatorComponent button){
-        elevatorComponents.add(button);
+    public void addButton(ElevatorSystemComponent button){
+        elevatorSystemComponents.add(button);
     }
 
     @Override
     public boolean buttonPressed(Button button, boolean handled) {
         boolean willHandle = false;
         int buttonFloor = button.getFloor();
-        for (ElevatorComponent elevator : elevatorComponents) {
+        for (ElevatorSystemComponent elevator : elevatorSystemComponents) {
             if (elevator instanceof Elevator) {
                 switch (((Elevator) elevator).getDirection()) {
                     case STATIONARY:
@@ -43,7 +43,7 @@ public class ConcreteMediator implements Mediator {
 
     @Override
     public void floorChanged(Elevator elevator) {
-        for (ElevatorComponent button : elevatorComponents){
+        for (ElevatorSystemComponent button : elevatorSystemComponents){
             if (button instanceof Button){
                 if (((Button) button).isPressed()){
                     // has the elevator arrived at this floor?
