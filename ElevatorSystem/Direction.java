@@ -1,3 +1,5 @@
+package ElevatorSystem;
+
 /**
  * Enumeration used to represent elevator and button directions.
  *

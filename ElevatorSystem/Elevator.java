@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+package ElevatorSystem;
 
 /**
  * The basic elevator class.  This is not a particularly sophisticated
@@ -7,7 +6,7 @@ import java.util.List;
  *
  * Created by robertstjacquesjr on 7/12/17.
  */
-public class Elevator implements ButtonObserver {
+public class Elevator extends ElevatorComponent {
     /**
      * The elevator number.
      */
@@ -29,23 +28,17 @@ public class Elevator implements ButtonObserver {
     private Direction direction;
 
     /**
-     * The list of registered observers.  Notified whenever the elevator
-     * arrives at a new floor.
-     */
-    private List<ElevatorObserver> observers;
-
-    /**
      * Constructs a new elevator with the specified number.
      *
      * @param number The elevator's number; should be unique.  Used as an
      *               identifier for an elevator.
      */
-    public Elevator(int number) {
+
+    public Elevator(ConcreteMediator mediator, int number) {
+        super(mediator);
         this.number = number;
         currentFloor = 1;
         destinationFloor = currentFloor;
-
-        observers = new ArrayList<>();
     }
 
     /**
@@ -128,62 +121,9 @@ public class Elevator implements ButtonObserver {
     }
 
     /**
-     * Adds an observer to this elevator to be notified when the elevator
-     * arrives at a new floor.
-     *
-     * @param observer The new observer.
-     */
-    public void addElevatorObserver(ElevatorObserver observer) {
-        observers.add(observer);
-    }
-
-    /**
-     * Removes an observer that was previously registered to be notified.
-     *
-     * @param observer The observer to remove.
-     */
-    public void removeElevatorObserver(ElevatorObserver observer) {
-        observers.remove(observer);
-    }
-
-    /**
-     * Called when a button that this elevator is observing is pressed.
-     *
-     * @param button The button that was pressed.
-     *
-     * @param handled A boolean indicating whether or not the button press
-     *                was handled by a previous observer.
-     *
-     * @return A boolean indicating whether or not this button will handle the
-     * button press event.
-     */
-    @Override
-    public boolean buttonPressed(Button button, boolean handled) {
-        boolean willHandle = false;
-        int buttonFloor = button.getFloor();
-
-        switch(direction) {
-            case STATIONARY:
-                setDestinationFloor(buttonFloor);
-                willHandle = true;
-                break;
-            case DOWN:
-                willHandle = buttonFloor < currentFloor;
-                break;
-            case UP:
-                willHandle = buttonFloor > currentFloor;
-                break;
-        }
-
-        return willHandle;
-    }
-
-    /**
      * Notifies observers when the elevator arrives at a floor.
      */
     private void fireFloorChanged() {
-        for(ElevatorObserver observer : observers) {
-            observer.floorChanged(this);
-        }
+        mediator.floorChanged(this);
     }
 }
